@@ -384,67 +384,76 @@ h3 {
     color: #4d4943;
 }
 
-/* Gallery */
-.gallery-head {
+/* Gallery: a full-bleed row that snaps and peeks past the edge, like the Countless page */
+.gallery-track {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 20px;
+    gap: 28px;
+    margin-top: clamp(16px, 3vw, 28px);
+    padding: 16px max(clamp(16px, 4vw, 32px), calc((100% - 1088px) / 2)) 40px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: max(clamp(16px, 4vw, 32px), calc((100% - 1088px) / 2));
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
-.arrows {
+.gallery-track::-webkit-scrollbar {
     display: none;
-    gap: 8px;
 }
-.js .arrows {
-    display: flex;
+.gallery-track figure {
+    flex: none;
+    margin: 0;
+    scroll-snap-align: start;
+}
+.gallery-track img {
+    width: 250px;
+    height: auto;
+    aspect-ratio: 1000 / 2173;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+.gallery-track figcaption {
+    width: 250px;
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--muted);
+}
+.gallery-track figcaption strong {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 17px;
+    color: var(--text);
+}
+.gallery-ctrl {
+    display: none;
+    justify-content: flex-end;
+    gap: 10px;
 }
 .arrow {
     display: grid;
     place-items: center;
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
     padding: 0;
     border: 1px solid var(--border);
     border-radius: 50%;
     background: var(--surface);
     color: var(--text);
     cursor: pointer;
-    transition: background 0.15s;
+    transition: background 0.2s, border-color 0.2s;
 }
 .arrow:hover {
     background: var(--raised);
+    border-color: var(--accent);
 }
 .arrow svg {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     fill: none;
     stroke: currentColor;
-    stroke-width: 2.2;
+    stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-}
-.gallery-track {
-    display: flex;
-    gap: 16px;
-    margin-top: clamp(24px, 4vw, 40px);
-    padding-bottom: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
-    -webkit-overflow-scrolling: touch;
-}
-.gallery-track li {
-    flex: 0 0 auto;
-    width: clamp(220px, 62vw, 272px);
-    scroll-snap-align: start;
-}
-.gallery-track img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1000 / 2173;
-    border-radius: 22px;
-    box-shadow: var(--shadow);
 }
 
 /* Plans */
@@ -626,6 +635,9 @@ h3 {
 }
 
 @media (min-width: 640px) {
+    .gallery-ctrl {
+        display: flex;
+    }
     .cards {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -658,6 +670,11 @@ h3 {
 @media (min-width: 960px) {
     .cards {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (hover: none) {
+    .gallery-ctrl {
+        display: none;
     }
 }
 @media (max-width: 639px) {
