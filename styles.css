@@ -557,6 +557,18 @@ h3 {
 }
 
 /* Support and final call */
+.wrap.narrow {
+    max-width: calc(780px + 2 * clamp(16px, 4vw, 32px));
+}
+.center {
+    text-align: center;
+}
+.center .section-lead {
+    margin-inline: auto;
+}
+.support-cta {
+    margin-top: 32px;
+}
 .support-box {
     display: grid;
     gap: 22px;
